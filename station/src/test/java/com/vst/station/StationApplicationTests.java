@@ -30,49 +30,7 @@ class StationApplicationTests {
 	
 	@Autowired
 	StationConveter conveter;
-	
-	
-//	@Test
-//	public void addStationTset() {
-//		Station station = new Station();
-//		station.setStationId("S001");
-//		station.setStationName("Central Station");
-//		station.setStationHostId("H001");
-//		station.setStationVendorId("V001");
-//		station.setStationLocation("Los Angeles");
-//		station.setStationLocationURL("www.centralstation.com");
-//		station.setStationParkingArea("North Parking");
-//		station.setStationContactNumber("555-555-5555");
-//		station.setStationWorkingTime("24/7");
-//		station.setStationParkingType("Paid");
-//		ArrayList<String> stationAmenities = new ArrayList<>();
-//		stationAmenities.add("ATM");
-//		stationAmenities.add("Restaurant");
-//		station.setStationAmenity(stationAmenities);
-//		station.setCreatedDate("2022-01-01");
-//		station.setModifiedDate("2022-01-02");
-//		station.setCreatedBy("Admin");
-//		station.setModifiedBy("Admin");
-//		station.setActive(true);
-//	
-//		assertEquals("S001", station.getStationId());
-//		assertEquals("Central Station", station.getStationName());
-//		assertEquals("H001", station.getStationHostId());
-//		assertEquals("V001", station.getStationVendorId());
-//		assertEquals("Los Angeles", station.getStationLocation());
-//		assertEquals("www.centralstation.com", station.getStationLocationURL());
-//		assertEquals("North Parking", station.getStationParkingArea());
-//		assertEquals("555-555-5555", station.getStationContactNumber());
-//		assertEquals("24/7", station.getStationWorkingTime());
-//		assertEquals("Paid", station.getStationParkingType());
-//		assertEquals(stationAmenities, station.getStationAmenity());
-//		assertEquals("2022-01-01", station.getCreatedDate());
-//		assertEquals("2022-01-02", station.getModifiedDate());
-//		assertEquals("Admin", station.getCreatedBy());
-//		assertEquals("Admin", station.getModifiedBy());
-//		assertEquals(true, station.isActive());
-//	}
-	
+		
 	@Test
 	public void saveUserTest() {
 		Station station = new Station();

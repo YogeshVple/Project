@@ -7,7 +7,7 @@ import com.vst.booking.model.Booking;
 
 public interface BookingServiceInterface {
 
-	public void add(BookingDto bookingDto);
+	public String add(BookingDto bookingDto);
 	
 	public void edit(String bookingId, BookingDto bookingDto);
 	

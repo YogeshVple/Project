@@ -16,7 +16,7 @@ import com.vst.booking.exception.IdNotAcceptableException;
 @RestControllerAdvice
 public class BookingApiError {
 	
-	 String message ="error message";
+	 String message ="error";
 
 	@ExceptionHandler(BookingNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -54,6 +54,7 @@ public class BookingApiError {
         return errorMap;
     }
     
+    /**
     @ExceptionHandler(NullPointerException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, Object> nullPointer(NullPointerException ex){
@@ -65,5 +66,5 @@ public class BookingApiError {
         response.setTimeStamp(LocalDateTime.now());
         errorMap.put(message, response);
         return errorMap;
-    }
+    }*/
 }

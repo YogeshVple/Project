@@ -33,6 +33,6 @@ public class BookingSequenceGeneratorService {
 	public String idGen() {
 		Date dNow = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MMddyyyy_HHmmss");
-		return dateFormat.format(dNow) + getSequenceNumber(BookingDto.SEQUENCE_NAME);
+		return dateFormat.format(dNow)+"_"+getSequenceNumber(BookingDto.SEQUENCE_NAME);
 	}
 }

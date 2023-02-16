@@ -2,6 +2,8 @@ package com.vst.booking.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,7 @@ import com.vst.booking.dto.BookingDto;
 import com.vst.booking.model.Booking;
 import com.vst.booking.service.BookingServiceImpl;
 
-import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/vst1")
@@ -46,7 +48,7 @@ public class BookingController {
 
 	@PutMapping("/booking")
 	public ResponseEntity<String> updateBooking(@RequestParam("bookingId") String bookingId,
-			@RequestBody BookingDto bookingDto) {
+			@Valid @RequestBody BookingDto bookingDto) {
 
 		bookingServiceImpl.edit(bookingId, bookingDto);
 		return new ResponseEntity<>("Booking Details Updated Succesfully", HttpStatus.OK);
