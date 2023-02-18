@@ -16,4 +16,16 @@ public interface BookingServiceInterface {
 	public List<Booking> showAll();
 
 	public Booking show(String bookingId);
+	
+	public List<Booking> getDetailsByHostId (String bookingHostId);
+	
+	public Booking getDetailsByCustomerId(String bookingCustomerId);
+	
+	public List<Booking> getDetailsByVendorId(String bookingVendorId);
+	
+	public List<Booking> getDetailsByStationId(String bookingStationId);
+	
+	public List<Booking> getDetailsByStatus(String bookingStatus);
+	
+	
 }

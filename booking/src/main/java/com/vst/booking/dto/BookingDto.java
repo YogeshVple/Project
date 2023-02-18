@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-
+import org.springframework.data.mongodb.core.index.Indexed;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,7 +35,7 @@ public class BookingDto {
 	@NotBlank @NotNull (message = "Invaild Host ID")
 	private String bookingHostId;
 	
-	@NotBlank @NotNull (message = "Invaild Customer ID")
+	@Indexed @NotBlank @NotNull (message = "Invaild Customer ID")
 	private String bookingCustomerId;
 	
 	@NotBlank @NotNull (message = "Invaild Vendor ID")
