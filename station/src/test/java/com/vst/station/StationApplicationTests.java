@@ -55,6 +55,6 @@ class StationApplicationTests {
 		station.setActive(true);
 		StationDto dto =conveter.entityToDto(station);
 		when(stationRepository.save(station)).thenReturn(station);
-		assertEquals(dto, stationServiceImpl.addstation(dto));
+		assertEquals(dto, stationServiceImpl.add(dto));
 	}
 }

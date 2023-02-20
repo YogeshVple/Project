@@ -7,11 +7,11 @@ import com.vst.transaction.model.Transaction;
 
 public interface TransactionServiceInterface {
 
-	public TransactionDto saveTransaction(TransactionDto transactionDto);
+	public String add(TransactionDto transactionDto);
 	
-	public boolean updateTransaction(String transactionId, TransactionDto transactionDto);
+	public void edit(String transactionId, TransactionDto transactionDto);
 	
-	public boolean deleteTransaction(String transactionId);
+	public void remove(String transactionId);
 	
-	List<Transaction> getAllTrasaction();
+	List<Transaction> showAll();
 }

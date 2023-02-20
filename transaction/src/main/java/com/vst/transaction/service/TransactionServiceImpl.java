@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.vst.transaction.conveter.TransactionConveter;
 import com.vst.transaction.dto.TransactionDto;
-import com.vst.transaction.exception.TransactionException;
+import com.vst.transaction.exception.TransactionIdNotAcceptableException;
+import com.vst.transaction.exception.TransactionNotFoundException;
 import com.vst.transaction.model.Transaction;
 import com.vst.transaction.repository.TransactionRepository;
 
@@ -24,74 +25,114 @@ public class TransactionServiceImpl implements TransactionServiceInterface {
 	TransactionConveter conveter;
 
 	@Override
-	public TransactionDto saveTransaction(TransactionDto transactionDto) {
+	public String add(TransactionDto transactionDto) {
 
 		transactionDto.setTransactionId(transactionSequenceGeneratorService.idGen());
 		transactionDto.setActive(true);
-
 		Transaction obj = conveter.dtoToEntity(transactionDto);
 		transactionRepository.save(obj);
-		return conveter.entityToDto(obj);
+		return "Data Added";
 
 	}
 
 	@Override
-	public boolean updateTransaction(String transactionId, TransactionDto transactionDto) {
+	public void edit(String transactionId, TransactionDto transactionDto) {
 
-		Transaction transaction = transactionRepository.findByTransactionIdAndIsActiveTrue(transactionId);
+		if (!transactionId.isBlank()) {
 
-		Transaction obj = conveter.dtoToEntity(transactionDto);
-		if (transaction != null) {
-			if (transaction.getTransactionCustomerId() != null)
-				obj.setTransactionCustomerId(transaction.getTransactionCustomerId());
-			if (transaction.getTransactionHostId() != null)
-				obj.setTransactionHostId(transaction.getTransactionHostId());
-			if (transaction.getTransactionVendorId() != null)
-				obj.setTransactionVendorId(transaction.getTransactionVendorId());
-			if (transaction.getTransactionStationId() != null)
-				obj.setTransactionStationId(transaction.getTransactionStationId());
-			if (transaction.getTransactionStatus() != null)
-				obj.setTransactionStatus(transaction.getTransactionStatus());
-			if (transaction.getTransactionUTR() != null)
-				obj.setTransactionUTR(transaction.getTransactionUTR());
-			if (transaction.getTransactionDate() != null)
-				obj.setTransactionDate(transaction.getTransactionDate());
-			if (transaction.getTransactionTime() != null)
-				obj.setTransactionTime(transaction.getTransactionTime());
-			if (transaction.getTransactionAmount() != null)
-				obj.setTransactionAmount(transaction.getTransactionAmount());
-			if (transaction.getCreatedDate() != null)
-				obj.setCreatedDate(transaction.getCreatedDate());
-			if (transaction.getModifiedDate() != null)
-				obj.setModifiedDate(transaction.getModifiedDate());
-			if (transaction.getCreatedBy() != null)
-				obj.setCreatedBy(transaction.getCreatedBy());
-			if (transaction.getModifiedBy() != null)
-				obj.setModifiedBy(transaction.getModifiedBy());
+			Transaction transaction = transactionRepository.findByTransactionIdAndIsActiveTrue(transactionId);
 
-			transactionRepository.save(obj);
+			Transaction obj = conveter.dtoToEntity(transactionDto);
+			if (transaction != null) {
 
+				if (transaction.getTransactionCustomerId() != null)
+					if (!transaction.getTransactionCustomerId().isBlank())
+						obj.setTransactionCustomerId(transaction.getTransactionCustomerId());
+
+				if (transaction.getTransactionHostId() != null)
+					if (!transaction.getTransactionHostId().isBlank())
+						obj.setTransactionHostId(transaction.getTransactionHostId());
+
+				if (transaction.getTransactionVendorId() != null)
+					if (!transaction.getTransactionVendorId().isBlank())
+						obj.setTransactionVendorId(transaction.getTransactionVendorId());
+
+				if (transaction.getTransactionStationId() != null)
+					if (!transaction.getTransactionStationId().isBlank())
+						obj.setTransactionStationId(transaction.getTransactionStationId());
+
+				if (transaction.getTransactionStatus() != null)
+					if (!transaction.getTransactionStationId().isBlank())
+						obj.setTransactionStatus(transaction.getTransactionStatus());
+
+				if (transaction.getTransactionUTR() != null)
+					if (!transaction.getTransactionUTR().isBlank())
+						obj.setTransactionUTR(transaction.getTransactionUTR());
+
+				if (transaction.getTransactionDate() != null)
+					if (!transaction.getTransactionDate().isBlank())
+						obj.setTransactionDate(transaction.getTransactionDate());
+
+				if (transaction.getTransactionTime() != null)
+					if (!transaction.getTransactionTime().isBlank())
+						obj.setTransactionTime(transaction.getTransactionTime());
+
+				if (transaction.getTransactionAmount() != null)
+					if (!transaction.getTransactionAmount().isBlank())
+						obj.setTransactionAmount(transaction.getTransactionAmount());
+
+				if (transaction.getCreatedDate() != null)
+					if (!transaction.getCreatedDate().isBlank())
+						obj.setCreatedDate(transaction.getCreatedDate());
+
+				if (transaction.getModifiedDate() != null)
+					if (!transaction.getModifiedDate().isBlank())
+						obj.setModifiedDate(transaction.getModifiedDate());
+
+				if (transaction.getCreatedBy() != null)
+					if (!transaction.getCreatedBy().isBlank())
+						obj.setCreatedBy(transaction.getCreatedBy());
+
+				if (transaction.getModifiedBy() != null)
+					if (!transaction.getModifiedBy().isBlank())
+						obj.setModifiedBy(transaction.getModifiedBy());
+
+				transactionRepository.save(obj);
+
+			} else {
+				throw new TransactionNotFoundException("Not Found");
+			}
 		} else {
-			throw new TransactionException("Samthing Went Wrong");
+			throw new TransactionIdNotAcceptableException("Invaild ID");
 		}
-		return true;
 	}
 
 	@Override
-	public boolean deleteTransaction(String transactionId) {
+	public void remove(String transactionId) {
 
-		Transaction obj = transactionRepository.findByTransactionIdAndIsActiveTrue(transactionId);
-		if (obj != null) {
-			obj.setActive(false);
-			transactionRepository.save(obj);
-			return true;
+		if (!transactionId.trim().isBlank()) {
+			Transaction obj = transactionRepository.findByTransactionIdAndIsActiveTrue(transactionId);
+			if (obj != null) {
+				obj.setActive(false);
+				transactionRepository.save(obj);
+			} else {
+				throw new TransactionNotFoundException("Not Found");
+			}
+		} else {
+			throw new TransactionIdNotAcceptableException("Invaild ID");
 		}
-		return false;
 	}
 
 	@Override
-	public List<Transaction> getAllTrasaction() {
-		return transactionRepository.findAllByIsActiveTrue();
+	public List<Transaction> showAll() {
+
+		List<Transaction> list = transactionRepository.findAllByIsActiveTrue();
+
+		if (!list.isEmpty()) {
+			return list;
+		} else {
+			throw new TransactionNotFoundException("No Data");
+		}
 	}
 
 }

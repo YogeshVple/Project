@@ -8,13 +8,13 @@ import com.vst.station.model.Station;
 
 public interface StationServiceInterface {
 
-	public StationDto addstation(StationDto stationDto);
+	public String add(StationDto stationDto);
 	
-	public boolean updateStationDetails(String stationId, StationDto stationDto);
+	public void edit(String stationId, StationDto stationDto);
 	
-	public boolean deleteStation(String stationId);
+	public void remove(String stationId);
 	
-	public List<Station> getAllStation();
+	public List<Station> showAll();
 	
 	
 }

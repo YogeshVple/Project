@@ -22,55 +22,34 @@ import com.vst.notification.service.NotificationServiceImpl;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/notification")
+@RequestMapping("/vst1")
 public class NotificationController {
 
 	@Autowired
 	NotificationServiceImpl notificationServiceImpl;
 
-
-	@PostMapping("/addNotification")
+	@PostMapping("/notificatoin")
 	@Validated
-	public ResponseEntity<String> saveNotificationDetails(@Valid @RequestBody NotificationDto notificationDto) {
-
-		NotificationDto dto = notificationServiceImpl.saveNotification(notificationDto);
-
-		if (dto != null) {
-			return new ResponseEntity<>("Details Added Sucessfully", HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>("Samting Went Wromng", HttpStatus.NOT_ACCEPTABLE);
-		}
+	public ResponseEntity<String> saveNotification(@Valid @RequestBody NotificationDto notificationDto) {
+		notificationServiceImpl.add(notificationDto);
+			return new ResponseEntity<>("Details Added Sucessfully", HttpStatus.OK);	
 	}
 
-	@PutMapping("/updateNotification")
-	public ResponseEntity<String> updateNotificationDetails(@RequestParam("notificationId") String notificationId,
+	@PutMapping("/notification")
+	public ResponseEntity<String> updateNotification(@RequestParam("notificationId") String notificationId,
 			@RequestBody NotificationDto notificationDto) {
-		if (notificationId != null) {
-			if (notificationServiceImpl.updateNotification(notificationId, notificationDto)) {
-				return new ResponseEntity<>("Notification Details Updated Successfully", HttpStatus.OK);
-			} else {
-				return new ResponseEntity<>("Samthing Went Wrong", HttpStatus.NOT_ACCEPTABLE);
-			}
-		} else {
-			return new ResponseEntity<>("Notification ID not Vaild", HttpStatus.NOT_ACCEPTABLE);
-		}
+		notificationServiceImpl.edit(notificationId, notificationDto);
+		return new ResponseEntity<>("Notification Updated",HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/deleteNotification")
-	public ResponseEntity<String> deleteNotificationDetails(@RequestParam("notificationId") String notificationId){
-		if(notificationId!=null) {
-			if(notificationServiceImpl.deleteNotification(notificationId)) {
-				return new ResponseEntity<>("Data delete Successfully",HttpStatus.OK);
-			}else {
-				return new ResponseEntity<>("Samthing Went Wrong",HttpStatus.NOT_ACCEPTABLE);
-			}
-		}else {
-			return new ResponseEntity<>("Notification ID not Vaild",HttpStatus.NOT_ACCEPTABLE);
-		}
+	@DeleteMapping("/notification")
+	public ResponseEntity<String> deleteNotification(@RequestParam("notificationId") String notificationId){
+		notificationServiceImpl.remove(notificationId);
+		return new ResponseEntity<>("Notification Delete",HttpStatus.OK);
 	}
 	
-	@GetMapping("/getNotificationDetails")
-	public List<Notification> getAllDetails(){
-		return notificationServiceImpl.getNotification();
+	@GetMapping("/notifications")
+	public ResponseEntity<List<Notification>> getAll(){
+		return ResponseEntity.ok(notificationServiceImpl.showAll());
 	}
 }

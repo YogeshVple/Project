@@ -1,4 +1,4 @@
-package com.vst.booking.error;
+package com.vst.station.error;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.vst.booking.exception.BookingNotFoundException;
-import com.vst.booking.exception.BookingIdNotAcceptableException;
+import com.vst.station.exception.StationIdNotAcceptableException;
+import com.vst.station.exception.StationNotFoundException;
 
 @RestControllerAdvice
-public class BookingApiError {
+public class StationApiError {
 	
-	 String message ="error";
+	String message ="error";
 
-	@ExceptionHandler(BookingNotFoundException.class)
+	@ExceptionHandler(StationNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public Map<String, Object> userNotFound(BookingNotFoundException ex){
+    public Map<String, Object> userNotFound(StationNotFoundException ex){
         Map<String, Object> errorMap = new HashMap<>();
-        BookingErrorResponse response = new BookingErrorResponse();
+        StationErrorResponse response = new StationErrorResponse();
         response.setMessage("details you have given is not present");
         response.setStatus(HttpStatus.NOT_FOUND);
         response.setStatusCode("404");
@@ -31,11 +31,11 @@ public class BookingApiError {
         return errorMap;
     }
    
-	@ExceptionHandler(BookingIdNotAcceptableException.class)
+	@ExceptionHandler(StationIdNotAcceptableException.class)
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
-    public Map<String, Object> idNotFound(BookingIdNotAcceptableException ex){
+    public Map<String, Object> idNotFound(StationIdNotAcceptableException ex){
         Map<String, Object> errorMap = new HashMap<>();
-        BookingErrorResponse response = new BookingErrorResponse();
+        StationErrorResponse response = new StationErrorResponse();
         response.setMessage("ID is not correct or not available");
         response.setStatus(HttpStatus.NOT_ACCEPTABLE);
         response.setStatusCode("406");
@@ -53,18 +53,5 @@ public class BookingApiError {
         });
         return errorMap;
     }
-    
-    /**
-    @ExceptionHandler(NullPointerException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, Object> nullPointer(NullPointerException ex){
-        Map<String, Object> errorMap = new HashMap<>();
-        BookingErrorResponse response = new BookingErrorResponse();
-        response.setMessage("Same Field are empty");
-        response.setStatus(HttpStatus.BAD_REQUEST);
-        response.setStatusCode("406");
-        response.setTimeStamp(LocalDateTime.now());
-        errorMap.put(message, response);
-        return errorMap;
-    }*/
+
 }

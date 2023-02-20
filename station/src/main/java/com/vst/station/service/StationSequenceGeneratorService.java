@@ -32,9 +32,26 @@ public class StationSequenceGeneratorService {
 	
 	
 	public String idGen() {
+		String numberData = "";
 		Date dNow = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MMddyyyy_HHmmss");
-		return dateFormat.format(dNow)+"_"+getSequenceNumber(StationDto.SEQUENCE_NAME);
+		int num = getSequenceNumber(StationDto.SEQUENCE_NAME);
+		if (num >= 1 && num <= 9)
+			numberData = numberData + "000000" + num;
+		else if (num >= 10 && num <= 99)
+			numberData = numberData + "00000" + num;
+		else if (num >= 100 && num <= 999)
+			numberData = numberData + "0000" + num;
+		else if (num >= 1000 && num <= 9999)
+			numberData = numberData + "000" + num;
+		else if (num >= 10000 && num <= 1000000)
+			numberData = numberData + "00" + num;
+		else if (num >= 10000 && num <= 1000000)
+			numberData = numberData + "0" + num;
+		else if (num >= 10000 && num <= 1000000)
+			numberData = numberData + "" + num;
+		
+		return "NFT"+dateFormat.format(dNow)+numberData;
 	}
 		
 }	

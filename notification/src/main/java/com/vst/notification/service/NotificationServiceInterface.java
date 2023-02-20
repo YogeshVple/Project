@@ -7,11 +7,11 @@ import com.vst.notification.model.Notification;
 
 public interface NotificationServiceInterface {
 
-	public NotificationDto saveNotification(NotificationDto dto);
+	public String add(NotificationDto dto);
 	
-	public boolean updateNotification(String notificationId, NotificationDto dto);
+	public void edit(String notificationId, NotificationDto dto);
 	
-	public boolean deleteNotification(String notificationId);
+	public void remove(String notificationId);
 	
-	public List<Notification> getNotification();
+	public List<Notification> showAll();
 }

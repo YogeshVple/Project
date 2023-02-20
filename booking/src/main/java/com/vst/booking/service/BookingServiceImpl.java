@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.vst.booking.conveter.BookingConveter;
 import com.vst.booking.dto.BookingDto;
 import com.vst.booking.exception.BookingNotFoundException;
-import com.vst.booking.exception.IdNotAcceptableException;
+import com.vst.booking.exception.BookingIdNotAcceptableException;
 import com.vst.booking.model.Booking;
 import com.vst.booking.repository.BookingRepository;
 
@@ -58,7 +58,7 @@ public class BookingServiceImpl implements BookingServiceInterface {
 				throw new BookingNotFoundException("No Booking available");
 			}
 		} else {
-			throw new IdNotAcceptableException(string);
+			throw new BookingIdNotAcceptableException(string);
 		}
 	}
 
@@ -138,7 +138,7 @@ public class BookingServiceImpl implements BookingServiceInterface {
 				throw new BookingNotFoundException("No Booking Details available");
 			}
 		} else {
-			throw new IdNotAcceptableException(string);
+			throw new BookingIdNotAcceptableException(string);
 		}
 	}
 
@@ -155,7 +155,7 @@ public class BookingServiceImpl implements BookingServiceInterface {
 				throw new BookingNotFoundException("Not Found");
 			}
 		} else {
-			throw new IdNotAcceptableException(string);
+			throw new BookingIdNotAcceptableException(string);
 		}
 	}
 
@@ -169,7 +169,7 @@ public class BookingServiceImpl implements BookingServiceInterface {
 				throw new BookingNotFoundException("Not Found");
 			}
 		} else
-			throw new IdNotAcceptableException(string);
+			throw new BookingIdNotAcceptableException(string);
 	}
 
 	@Override
@@ -182,7 +182,7 @@ public class BookingServiceImpl implements BookingServiceInterface {
 				throw new BookingNotFoundException("Not Found");
 			}
 		} else
-			throw new IdNotAcceptableException(string);
+			throw new BookingIdNotAcceptableException(string);
 	}
 
 	@Override
@@ -195,7 +195,7 @@ public class BookingServiceImpl implements BookingServiceInterface {
 				throw new BookingNotFoundException("Not Found");
 			}
 		} else
-			throw new IdNotAcceptableException(string);
+			throw new BookingIdNotAcceptableException(string);
 	}
 
 	@Override
@@ -208,7 +208,7 @@ public class BookingServiceImpl implements BookingServiceInterface {
 				throw new BookingNotFoundException("Not Found");
 			}
 		} else
-			throw new IdNotAcceptableException(string);
+			throw new BookingIdNotAcceptableException(string);
 	}
 
 	@Override
@@ -221,6 +221,6 @@ public class BookingServiceImpl implements BookingServiceInterface {
 				throw new BookingNotFoundException("Not Found");
 			}
 		} else
-			throw new IdNotAcceptableException(string);
+			throw new BookingIdNotAcceptableException(string);
 	}
 }

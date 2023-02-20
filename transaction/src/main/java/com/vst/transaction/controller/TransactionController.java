@@ -16,66 +16,40 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vst.transaction.dto.TransactionDto;
-import com.vst.transaction.exception.TransactionException;
 import com.vst.transaction.model.Transaction;
 import com.vst.transaction.service.TransactionServiceImpl;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/transaction")
+@RequestMapping("/vst1")
 public class TransactionController {
 
 	@Autowired
 	TransactionServiceImpl transactionServiceImpl;
 
-	@PostMapping("/addTransaction")
+	@PostMapping("/transaction")
 	@Validated
-	public ResponseEntity<String> saveTransactionDetails(@Valid @RequestBody TransactionDto transactionDto) {
-
-		TransactionDto obj = transactionServiceImpl.saveTransaction(transactionDto);
-		if (obj != null) {
-			return new ResponseEntity<>("Added Successfully", HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>("Samthing Went Wrong", HttpStatus.NOT_ACCEPTABLE);
-		}
+	public ResponseEntity<String> saveTransaction(@Valid @RequestBody TransactionDto transactionDto) {
+		transactionServiceImpl.add(transactionDto);
+		return new ResponseEntity<>("Transaction Successful", HttpStatus.OK);
 	}
 
-	@PutMapping("/updateTransaction")
-	public ResponseEntity<String> updateTrasactionDetails(@RequestParam("transactioId") String transactioId,
+	@PutMapping("/transaction")
+	public ResponseEntity<String> updateTrasaction(@RequestParam("transactioId") String transactioId,
 			@RequestBody TransactionDto dto) {
-		if (transactioId != null) {
-			if (transactionServiceImpl.updateTransaction(transactioId, dto)) {
-				return new ResponseEntity<>("Update Successfully", HttpStatus.OK);
-			} else {
-				return new ResponseEntity<>("Samthing Went Wrong", HttpStatus.NOT_ACCEPTABLE);
-			}
-		} else {
-			return new ResponseEntity<>("Wrong ID", HttpStatus.NOT_ACCEPTABLE);
-		}
+		transactionServiceImpl.edit(transactioId, dto);
+		return new ResponseEntity<>("Update Successfully", HttpStatus.OK);
 	}
 
-	@DeleteMapping("/deleteTransaction")
-	public ResponseEntity<String> deleteDetails(@RequestParam("transactioId") String transactioId) {
-		if (transactioId != null) {
-			if (transactionServiceImpl.deleteTransaction(transactioId)) {
-				return new ResponseEntity<>("Delete Successfully", HttpStatus.OK);
-			} else {
-				return new ResponseEntity<>("Data Not Found", HttpStatus.NOT_ACCEPTABLE);
-			}
-		} else {
-			return new ResponseEntity<>("Wrong ID", HttpStatus.NOT_ACCEPTABLE);
-		}
+	@DeleteMapping("/transaction")
+	public ResponseEntity<String> delete(@RequestParam("transactioId") String transactioId) {
+		transactionServiceImpl.remove(transactioId);
+		return new ResponseEntity<>("Delete Successfully", HttpStatus.OK);
 	}
 
-	@GetMapping("/getAll")
+	@GetMapping("/transactions")
 	public ResponseEntity<List<Transaction>> getAllTrasaction() {
-
-		List<Transaction> list = transactionServiceImpl.getAllTrasaction();
-		if (list != null) {
-			return new ResponseEntity<>(list, HttpStatus.OK);
-		} else {
-			throw new TransactionException("No Data Found");
-		}
+		return ResponseEntity.ok(transactionServiceImpl.showAll());
 	}
 }

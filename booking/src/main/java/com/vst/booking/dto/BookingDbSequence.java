@@ -17,5 +17,5 @@ public class BookingDbSequence {
 
 	@Id
     private String  id;
-    private int seq;
+    private Integer seq;
 }
