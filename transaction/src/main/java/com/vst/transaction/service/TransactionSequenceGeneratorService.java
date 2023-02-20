@@ -14,7 +14,6 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import com.vst.transaction.dto.TransactionDto;
-import com.vst.booking.dto.BookingDto;
 import com.vst.transaction.dto.TransactionDbSequence;
 
 @Service

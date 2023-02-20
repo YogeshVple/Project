@@ -51,7 +51,7 @@ public class StationSequenceGeneratorService {
 		else if (num >= 10000 && num <= 1000000)
 			numberData = numberData + "" + num;
 		
-		return "NFT"+dateFormat.format(dNow)+numberData;
+		return "STN"+dateFormat.format(dNow)+numberData;
 	}
 		
 }	

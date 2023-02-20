@@ -22,14 +22,14 @@ public class TransactionServiceImpl implements TransactionServiceInterface {
 	TransactionSequenceGeneratorService transactionSequenceGeneratorService;
 
 	@Autowired
-	TransactionConveter conveter;
+	TransactionConveter transactionConveter;
 
 	@Override
 	public String add(TransactionDto transactionDto) {
 
 		transactionDto.setTransactionId(transactionSequenceGeneratorService.idGen());
 		transactionDto.setActive(true);
-		Transaction obj = conveter.dtoToEntity(transactionDto);
+		Transaction obj = transactionConveter.dtoToEntity(transactionDto);
 		transactionRepository.save(obj);
 		return "Data Added";
 
@@ -42,7 +42,7 @@ public class TransactionServiceImpl implements TransactionServiceInterface {
 
 			Transaction transaction = transactionRepository.findByTransactionIdAndIsActiveTrue(transactionId);
 
-			Transaction obj = conveter.dtoToEntity(transactionDto);
+			Transaction obj = transactionConveter.dtoToEntity(transactionDto);
 			if (transaction != null) {
 
 				if (transaction.getTransactionCustomerId() != null)
