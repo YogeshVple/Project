@@ -22,8 +22,6 @@ import com.vst.booking.dto.BookingDto;
 import com.vst.booking.model.Booking;
 import com.vst.booking.service.BookingServiceImpl;
 
-
-
 @RestController
 @RequestMapping("/vst1")
 @CrossOrigin(origins = "*")
@@ -51,7 +49,7 @@ public class BookingController {
 
 	@PutMapping("/booking")
 	public ResponseEntity<String> updateBooking(@RequestParam("bookingId") String bookingId,
-			 @RequestBody BookingDto bookingDto) {
+			@RequestBody BookingDto bookingDto) {
 
 		bookingServiceImpl.edit(bookingId, bookingDto);
 		return new ResponseEntity<>("Booking Details Updated Succesfully", HttpStatus.OK);
@@ -63,60 +61,59 @@ public class BookingController {
 		bookingServiceImpl.remove(bookingId);
 		return new ResponseEntity<>("Booking Deleted Succesfully", HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/bookingsHost")
 	public ResponseEntity<List<Booking>> getAllBookingByHost(@RequestParam("bookingHostId") String bookingHostId) {
 		return ResponseEntity.ok(bookingServiceImpl.getDetailsByHostId(bookingHostId));
 	}
-	
+
 	@GetMapping("/bookingsCustomer")
 	public ResponseEntity<Booking> getBookingByCustomerId(@RequestParam("bookingCustomerId") String bookingCustomerId) {
 		return ResponseEntity.ok(bookingServiceImpl.getDetailsByCustomerId(bookingCustomerId));
 	}
-	
+
 	@GetMapping("/bookingsVendor")
-	public ResponseEntity<List<Booking>> getAllBookingByVendorId(@RequestParam("bookingVendorId") String bookingVendorId ) {
+	public ResponseEntity<List<Booking>> getAllBookingByVendorId(
+			@RequestParam("bookingVendorId") String bookingVendorId) {
 		return ResponseEntity.ok(bookingServiceImpl.getDetailsByVendorId(bookingVendorId));
 	}
-	
+
 	@GetMapping("/bookingsStation")
-	public ResponseEntity<List<Booking>> getAllBookingByStationID(@RequestParam("bookingStationId") String bookingStationId ) {
+	public ResponseEntity<List<Booking>> getAllBookingByStationID(
+			@RequestParam("bookingStationId") String bookingStationId) {
 		return ResponseEntity.ok(bookingServiceImpl.getDetailsByStationId(bookingStationId));
 	}
-	
+
 	@GetMapping("/bookingsStatus")
 	public ResponseEntity<List<Booking>> getAllBookingByStatus(@RequestParam("bookingStatus") String bookingStatus) {
 		return ResponseEntity.ok(bookingServiceImpl.getDetailsByStatus(bookingStatus));
 	}
-	
+
 	@PostMapping("/bookingadd")
 	public void mult() {
-		BookingDto booking= new BookingDto();
-		
-		for(int i=1;i<10000;i++) {
-			
-			booking.setBookingId("1234"+i);
-			booking.setBookingType("reservation"+i);
-			booking.setBookingHostId("5678"+i);
-			booking.setBookingCustomerId("9012"+i);
-			booking.setBookingVendorId("3456"+i);
-			booking.setBookingStationId("XYZ123"+i);
-			booking.setBookingDate("2023-03-01"+i);
-			booking.setBookingTime("15:00:00"+i);
-			booking.setBookingCancellationReason("null"+i);
-			booking.setBookingStatus("confirmed"+i);
-			booking.setBookingReqDate("2023-02-28"+i);
-			booking.setBookingCancellationReqDate("null"+i);
-			booking.setCreatedDate("2023-02-15"+i);
-			booking.setModifiedDate("2023-02-15"+i);
-			booking.setCreatedBy("John Doe"+i);
-			booking.setModifiedBy("Jane Smith"+i);
+		BookingDto booking = new BookingDto();
+
+		for (int i = 1; i < 100; i++) {
+
+			booking.setBookingId("1234" + i);
+			booking.setBookingType("reservation" + i);
+			booking.setBookingHostId("5678" + i);
+			booking.setBookingCustomerId("9012" + i);
+			booking.setBookingVendorId("3456" + i);
+			booking.setBookingStationId("XYZ123" + i);
+			booking.setBookingDate("2023-03-01" + i);
+			booking.setBookingTime("15:00:00" + i);
+			booking.setBookingCancellationReason("null" + i);
+			booking.setBookingStatus("confirmed" + i);
+			booking.setBookingReqDate("2023-02-28" + i);
+			booking.setBookingCancellationReqDate("null" + i);
+			booking.setCreatedDate("2023-02-15" + i);
+			booking.setModifiedDate("2023-02-15" + i);
+			booking.setCreatedBy("John Doe" + i);
+			booking.setModifiedBy("Jane Smith" + i);
 			booking.setActive(true);
 			bookingServiceImpl.add(booking);
 		}
-		
-	}
-	
-	
 
+	}
 }

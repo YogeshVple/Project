@@ -16,5 +16,21 @@ public interface StationServiceInterface {
 	
 	public List<Station> showAll();
 	
+	public Station show(String stationId);
+	
+	public Station getByStationName(String stationName);
+	
+	public List<Station> getByHostId(String stationHostId);
+	
+	public List<Station> getByVendorId(String stationVendorId);
+	
+	public List<Station> getByLocation(String stationLocation);
+	
+	public List<Station> getByParkingArea(String stationParkingArea);
+	
+	public List<Station> getByWorkingTime(String stationWorkingTime);
+	
+	public List<Station> getByParkingType(String stationParkingType);
+	
 	
 }

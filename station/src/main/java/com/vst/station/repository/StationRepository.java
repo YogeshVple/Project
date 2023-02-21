@@ -14,7 +14,18 @@ public interface StationRepository extends MongoRepository<Station, String> {
 	
 	public List<Station>findAllByIsActiveTrue();
 	
+	List<Station> findByStationHostIdAndIsActiveTrue(String stationHostId);
 	
+	List<Station> findByStationVendorIdAndIsActiveTrue(String stationVendorId);
 	
-
+	List<Station> findByStationLocationAndIsActiveTrue(String stationLocation);
+	
+	List<Station> findByStationParkingAreaAndIsActiveTrue(String stationParkingArea);
+	
+	List<Station> findByStationWorkingTimeAndIsActiveTrue(String stationWorkingTime);
+	
+	List<Station> findByStationParkingTypeAndIsActiveTrue(String stationParkingType);
+	
+	Station findByStationNameAndIsActiveTrue(String stationName);
+	
 }

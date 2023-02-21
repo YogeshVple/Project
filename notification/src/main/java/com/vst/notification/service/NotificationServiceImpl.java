@@ -24,7 +24,7 @@ public class NotificationServiceImpl implements NotificationServiceInterface {
 	@Autowired
 	NotificationSequenceGeneratorService notificationSequenceService;
 	
-	private String string = "Please Enter Vaild ID";
+	private String string = "Please Enter Vaild Data";
 
 	@Override
 	public String add(NotificationDto notificationDto) {
@@ -109,6 +109,50 @@ public class NotificationServiceImpl implements NotificationServiceInterface {
 			return list;
 		}else {
 			throw new NotificationNotFoundException("No Data Found");
+		}
+	}
+
+	@Override
+	public Notification show(String notificationId) {
+		if (!notificationId.trim().isBlank()) {
+			Notification obj = notificationRepository.findByNotificationIdAndIsActiveTrue(notificationId);
+			if (obj != null) {
+				return obj;
+			} else {
+				throw new NotificationNotFoundException("No Data Found");
+			}
+		} else {
+			throw new NotificationIdNotAcceptableException(string);
+		}
+
+	}
+
+	@Override
+	public List<Notification> getByNotificationCode(String notificationCode) {
+
+		if (!notificationCode.trim().isEmpty()) {
+			List<Notification> list = notificationRepository.findByNotificationCodeAndIsActiveTrue(notificationCode);
+			if (!list.isEmpty()) {
+				return list;
+			} else {
+				throw new NotificationNotFoundException("No Data Found");
+			}
+		} else {
+			throw new NotificationIdNotAcceptableException(string);
+		}
+	}
+
+	@Override
+	public List<Notification> getByNotificationType(String notificationType) {
+		if (!notificationType.trim().isEmpty()) {
+			List<Notification> list = notificationRepository.findByNotificationCodeAndIsActiveTrue(notificationType);
+			if (!list.isEmpty()) {
+				return list;
+			} else {
+				throw new NotificationNotFoundException("No Data Found");
+			}
+		} else {
+			throw new NotificationIdNotAcceptableException(string);
 		}
 	}
 }

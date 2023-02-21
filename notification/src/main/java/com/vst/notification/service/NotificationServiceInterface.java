@@ -14,4 +14,10 @@ public interface NotificationServiceInterface {
 	public void remove(String notificationId);
 	
 	public List<Notification> showAll();
+	
+	public Notification show(String notificationId);
+	
+	public List<Notification> getByNotificationCode(String notificationCode);
+	
+	public List<Notification> getByNotificationType(String notificationType);
 }

@@ -132,4 +132,116 @@ public class StationServiceImpl implements StationServiceInterface {
 		}
 	}
 
+	@Override
+	public Station show(String stationId) {
+		if (!stationId.trim().isBlank()) {
+			Station station = stationRepository.findByStationIdAndIsActiveTrue(stationId);
+			if (station != null) {
+				return station;
+			} else {
+				throw new StationNotFoundException("No Data found");
+			}
+		} else {
+			throw new StationIdNotAcceptableException("Id not Valid");
+		}
+	}
+
+	@Override
+	public List<Station> getByHostId(String stationHostId) {
+		if (!stationHostId.trim().isBlank()) {
+			List<Station> list = stationRepository.findByStationHostIdAndIsActiveTrue(stationHostId);
+			if (!list.isEmpty()) {
+				return list;
+			} else {
+				throw new StationNotFoundException("No Data found");
+			}
+		} else {
+			throw new StationIdNotAcceptableException("Id not Valid");
+		}
+	}
+
+	@Override
+	public List<Station> getByVendorId(String stationVendorId) {
+		if (!stationVendorId.trim().isBlank()) {
+			List<Station> list = stationRepository.findByStationVendorIdAndIsActiveTrue(stationVendorId);
+			if (!list.isEmpty()) {
+				return list;
+			} else {
+				throw new StationNotFoundException("Vendor ID not Found");
+			}
+		} else {
+			throw new StationIdNotAcceptableException("Not Validate Vendor ID");
+		}
+	}
+
+	@Override
+	public List<Station> getByLocation(String stationLocation) {
+		if (!stationLocation.trim().isBlank()) {
+			List<Station> list = stationRepository.findByStationLocationAndIsActiveTrue(stationLocation);
+			if (!list.isEmpty()) {
+				return list;
+			} else {
+				throw new StationNotFoundException("No Location Found");
+			}
+		} else {
+			throw new StationIdNotAcceptableException("Location Not Available");
+		}
+	}
+
+	@Override
+	public List<Station> getByParkingArea(String stationParkingArea) {
+		if (!stationParkingArea.trim().isBlank()) {
+			List<Station> list = stationRepository.findByStationLocationAndIsActiveTrue(stationParkingArea);
+			if (!list.isEmpty()) {
+				return list;
+			} else {
+				throw new StationNotFoundException("No Parking Available");
+			}
+		} else {
+			throw new StationIdNotAcceptableException("No Parking Available");
+		}
+	}
+
+	@Override
+	public List<Station> getByWorkingTime(String stationWorkingTime) {
+		if (!stationWorkingTime.trim().isBlank()) {
+			List<Station> list = stationRepository.findByStationLocationAndIsActiveTrue(stationWorkingTime);
+			if (!list.isEmpty()) {
+				return list;
+			} else {
+				throw new StationNotFoundException("All Station Closed");
+			}
+		} else {
+			throw new StationIdNotAcceptableException("No Station Found");
+		}
+	}
+
+	@Override
+	public List<Station> getByParkingType(String stationParkingType) {
+		if (!stationParkingType.trim().isBlank()) {
+			List<Station> list = stationRepository.findByStationLocationAndIsActiveTrue(stationParkingType);
+			if (!list.isEmpty()) {
+				return list;
+			} else {
+				throw new StationNotFoundException("No Parking Available");
+			}
+		} else {
+			throw new StationIdNotAcceptableException("No Parking Found");
+		}
+	}
+
+	@Override
+	public Station getByStationName(String stationName) {
+		if (!stationName.trim().isBlank()) {
+			Station station = stationRepository.findByStationNameAndIsActiveTrue(stationName);
+			if (station != null) {
+				return station;
+			} else {
+				throw new StationNotFoundException("No Parking Available");
+			}
+		} else {
+			throw new StationIdNotAcceptableException("No Parking Found");
+		}
+	}
+
 }

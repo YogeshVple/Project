@@ -32,24 +32,30 @@ public class NotificationController {
 	@Validated
 	public ResponseEntity<String> saveNotification(@Valid @RequestBody NotificationDto notificationDto) {
 		notificationServiceImpl.add(notificationDto);
-			return new ResponseEntity<>("Details Added Sucessfully", HttpStatus.OK);	
+		return new ResponseEntity<>("Details Added Sucessfully", HttpStatus.OK);
 	}
 
 	@PutMapping("/notification")
 	public ResponseEntity<String> updateNotification(@RequestParam("notificationId") String notificationId,
 			@RequestBody NotificationDto notificationDto) {
 		notificationServiceImpl.edit(notificationId, notificationDto);
-		return new ResponseEntity<>("Notification Updated",HttpStatus.OK);
+		return new ResponseEntity<>("Notification Updated", HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/notification")
-	public ResponseEntity<String> deleteNotification(@RequestParam("notificationId") String notificationId){
+	public ResponseEntity<String> deleteNotification(@RequestParam("notificationId") String notificationId) {
 		notificationServiceImpl.remove(notificationId);
-		return new ResponseEntity<>("Notification Delete",HttpStatus.OK);
+		return new ResponseEntity<>("Notification Delete", HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/notifications")
-	public ResponseEntity<List<Notification>> getAll(){
+	public ResponseEntity<List<Notification>> getAll() {
 		return ResponseEntity.ok(notificationServiceImpl.showAll());
 	}
+	
+	@GetMapping("/notification")
+	public ResponseEntity<Notification> getByNotificationId(@RequestParam("notificationId") String notificationId) {
+		return ResponseEntity.ok(notificationServiceImpl.show(notificationId));
+	}
+	
 }

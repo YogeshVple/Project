@@ -34,7 +34,7 @@ public class NotificationSequenceGeneratorService {
 	public String idGen() {
 		String numberData = "";
 		Date dNow = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MMddyyyy_HHmmss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MMddyyyyHHmmss");
 		int num = getSequenceNumber(NotificationDto.SEQUENCE_NAME);
 		if (num >= 1 && num <= 9)
 			numberData = numberData + "000000" + num;

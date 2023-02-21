@@ -11,4 +11,8 @@ public interface NotificationRepository extends MongoRepository<Notification, St
 	Notification findByNotificationIdAndIsActiveTrue(String notificationId);
 
 	List<Notification> findAllByIsActiveTrue();
+	
+	List<Notification> findByNotificationCodeAndIsActiveTrue(String notificationCode);
+	
+	List<Notification> findByNotificationTypeAndIsActiveTrue(String notificationType);
 }

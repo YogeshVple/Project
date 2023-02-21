@@ -51,9 +51,43 @@ public class StationController {
 		return new ResponseEntity<>("Booking Deleted Succesfully", HttpStatus.OK);
 	}
 
+	@GetMapping("/station")
+	public ResponseEntity<Station> getStation(@RequestParam("stationId") String stationId){
+		return ResponseEntity.ok(stationServiceImpl.show(stationId));
+	}
+	
+	@GetMapping("/station")
+	public ResponseEntity<Station> getStationName(@RequestParam("stationName") String stationName) {
+		return ResponseEntity.ok(stationServiceImpl.getByStationName(stationName));
+	}
+	
+	@GetMapping("/station")
+	public ResponseEntity<List<Station>> getStationHostId(@RequestParam("stationHostId") String stationHostId){
+		return ResponseEntity.ok(stationServiceImpl.getByHostId(stationHostId));
+	}
+	
+	@GetMapping("/station")
+	public ResponseEntity<List<Station>> getStationVendorId(@RequestParam("stationVendorId") String stationVendorId) {
+		return ResponseEntity.ok(stationServiceImpl.getByVendorId(stationVendorId));
+	}
+	
+	@GetMapping("/station")
+	public ResponseEntity<List<Station>> getStationLocation(@RequestParam("stationLocation") String stationLocation) {
+		return ResponseEntity.ok(stationServiceImpl.getByLocation(stationLocation));
+	}
+	
 	@GetMapping("/stations")
-	public ResponseEntity<List<Station>> getAllStation() {
-		return ResponseEntity.ok(stationServiceImpl.showAll());
-
+	public ResponseEntity<List<Station>> getStationParkingArea(@RequestParam("stationParkingArea") String stationParkingArea) {
+		return ResponseEntity.ok(stationServiceImpl.getByParkingArea(stationParkingArea));
+	}
+	
+	@GetMapping("/station")
+	public ResponseEntity<List<Station>> getStationParkingType(@RequestParam("stationParkingType") String stationParkingType) {
+		return ResponseEntity.ok(stationServiceImpl.getByParkingType(stationParkingType));
+	}
+	
+	@GetMapping("/station")
+	public ResponseEntity<List<Station>> getStationTime(@RequestParam("stationWorkingTime") String stationWorkingTime) {
+		return ResponseEntity.ok(stationServiceImpl.getByWorkingTime(stationWorkingTime));
 	}
 }

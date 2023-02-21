@@ -32,7 +32,6 @@ public class TransactionServiceImpl implements TransactionServiceInterface {
 		Transaction obj = transactionConveter.dtoToEntity(transactionDto);
 		transactionRepository.save(obj);
 		return "Data Added";
-
 	}
 
 	@Override
@@ -132,6 +131,107 @@ public class TransactionServiceImpl implements TransactionServiceInterface {
 			return list;
 		} else {
 			throw new TransactionNotFoundException("No Data");
+		}
+	}
+
+	@Override
+	public Transaction show(String transactionId) {
+		if (!transactionId.trim().isEmpty()) {
+			Transaction transaction = transactionRepository.findByTransactionIdAndIsActiveTrue(transactionId);
+			if (transaction != null) {
+				return transaction;
+			} else {
+				throw new TransactionNotFoundException("No Data Found");
+			}
+		} else {
+			throw new TransactionIdNotAcceptableException("Not acceptable");
+		}
+	}
+
+	@Override
+	public Transaction getByTransactionCustomerId(String transactionCustomerId) {
+		if (!transactionCustomerId.trim().isEmpty()) {
+			Transaction transaction = transactionRepository
+					.findByTransactionCustomerIdAndIsActiveTrue(transactionCustomerId);
+			if (transaction != null) {
+				return transaction;
+			} else {
+				throw new TransactionNotFoundException("No Data Found");
+			}
+		} else {
+			throw new TransactionIdNotAcceptableException("Not acceptable");
+		}
+	}
+
+	@Override
+	public Transaction getByTransactionHostId(String transactionHostId) {
+		if (!transactionHostId.trim().isEmpty()) {
+			Transaction transaction = transactionRepository.findByTransactionHostIdAndIsActiveTrue(transactionHostId);
+			if (transaction != null) {
+				return transaction;
+			} else {
+				throw new TransactionNotFoundException("No Data Found");
+			}
+		} else {
+			throw new TransactionIdNotAcceptableException("Not acceptable");
+		}
+	}
+
+	@Override
+	public Transaction getByTransactionVendorId(String transactionVendorId) {
+		if (!transactionVendorId.trim().isEmpty()) {
+			Transaction transaction = transactionRepository
+					.findByTransactionVendorIdAndIsActiveTrue(transactionVendorId);
+			if (transaction != null) {
+				return transaction;
+			} else {
+				throw new TransactionNotFoundException("No Data Found");
+			}
+		} else {
+			throw new TransactionIdNotAcceptableException("Not acceptable");
+		}
+	}
+
+	@Override
+	public Transaction getByTransactionStationId(String transactionStationId) {
+		if (!transactionStationId.trim().isEmpty()) {
+			Transaction transaction = transactionRepository
+					.findByTransactionStationIdAndIsActiveTrue(transactionStationId);
+			if (transaction != null) {
+				return transaction;
+			} else {
+				throw new TransactionNotFoundException("No Data Found");
+			}
+		} else {
+			throw new TransactionIdNotAcceptableException("Not acceptable");
+		}
+	}
+
+	@Override
+	public Transaction getByTransactionStatus(String transactionStatus) {
+		if (!transactionStatus.trim().isEmpty()) {
+			Transaction transaction = transactionRepository.findByTransactionStatusAndIsActiveTrue(transactionStatus);
+			if (transaction != null) {
+				return transaction;
+			} else {
+				throw new TransactionNotFoundException("No Data Found");
+			}
+		} else {
+			throw new TransactionIdNotAcceptableException("Not acceptable");
+		}
+	}
+
+	@Override
+	public Transaction getByTransactionUTRId(String transactionUTR) {
+		if (!transactionUTR.trim().isEmpty()) {
+			Transaction transaction = transactionRepository.findByTransactionUTRAndIsActiveTrue(transactionUTR);
+			if (transaction != null) {
+				return transaction;
+			} else {
+				throw new TransactionNotFoundException("No Data Found");
+			}
+		} else {
+			throw new TransactionIdNotAcceptableException("Not acceptable");
 		}
 	}
 

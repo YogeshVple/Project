@@ -146,7 +146,7 @@ public class BookingServiceImpl implements BookingServiceInterface {
 	@Transactional
 	public void remove(String bookingId) {
 
-		if (!bookingId.trim().isEmpty()) {
+		if (!bookingId.isBlank()) {
 			Booking obj = bookingRepository.findByBookingIdAndIsActiveTrue(bookingId);
 			if (obj != null) {
 				obj.setActive(false);

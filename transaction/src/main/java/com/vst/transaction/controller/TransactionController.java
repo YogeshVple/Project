@@ -36,20 +36,51 @@ public class TransactionController {
 	}
 
 	@PutMapping("/transaction")
-	public ResponseEntity<String> updateTrasaction(@RequestParam("transactioId") String transactioId,
+	public ResponseEntity<String> updateTransaction(@RequestParam("transactioId") String transactioId,
 			@RequestBody TransactionDto dto) {
 		transactionServiceImpl.edit(transactioId, dto);
 		return new ResponseEntity<>("Update Successfully", HttpStatus.OK);
 	}
 
 	@DeleteMapping("/transaction")
-	public ResponseEntity<String> delete(@RequestParam("transactioId") String transactioId) {
+	public ResponseEntity<String> deleteTransaction(@RequestParam("transactioId") String transactioId) {
 		transactionServiceImpl.remove(transactioId);
 		return new ResponseEntity<>("Delete Successfully", HttpStatus.OK);
 	}
 
 	@GetMapping("/transactions")
-	public ResponseEntity<List<Transaction>> getAllTrasaction() {
+	public ResponseEntity<List<Transaction>> getAllTransaction() {
 		return ResponseEntity.ok(transactionServiceImpl.showAll());
 	}
+	
+	@GetMapping("/transaction")
+	public ResponseEntity<Transaction> getTrasactionCustomer(@RequestParam("transactioCustomerId") String transactioCustomerId) {
+		return ResponseEntity.ok(transactionServiceImpl.getByTransactionCustomerId(transactioCustomerId));
+	}
+	
+	@GetMapping("/transaction")
+	public ResponseEntity<Transaction> getTrasactionHost(@RequestParam("transactioHostId") String transactioHostId) {
+		return ResponseEntity.ok(transactionServiceImpl.getByTransactionHostId(transactioHostId));
+	}
+	
+	@GetMapping("/transaction")
+	public ResponseEntity<Transaction> getTrasactionVendor(@RequestParam("transactioVendorId") String transactioVendorId) {
+		return ResponseEntity.ok(transactionServiceImpl.getByTransactionVendorId(transactioVendorId));
+	}
+	
+	@GetMapping("/transaction")
+	public ResponseEntity<Transaction> getTrasactionStation(@RequestParam("transactioStationId") String transactioStationId) {
+		return ResponseEntity.ok(transactionServiceImpl.getByTransactionStationId(transactioStationId));
+	}
+	
+	@GetMapping("/transaction")
+	public ResponseEntity<Transaction> getTrasactionStatus(@RequestParam("transactioStatus") String transactioStatus) {
+		return ResponseEntity.ok(transactionServiceImpl.getByTransactionStatus(transactioStatus));
+	}
+	
+	@GetMapping("/transaction")
+	public ResponseEntity<Transaction> getTrasactionUTR(@RequestParam("transactioUTR") String transactioUTR) {
+		return ResponseEntity.ok(transactionServiceImpl.getByTransactionUTRId(transactioUTR));
+	}
+	
 }

@@ -14,4 +14,19 @@ public interface TransactionServiceInterface {
 	public void remove(String transactionId);
 	
 	List<Transaction> showAll();
+	
+	Transaction show(String transactionId);
+	
+	Transaction getByTransactionCustomerId(String transactionCustomerId);
+	
+	Transaction getByTransactionHostId(String transactionHostId);
+	
+	Transaction getByTransactionVendorId(String transactionVendorId);
+
+	Transaction getByTransactionStationId(String transactionStationId);
+
+	Transaction getByTransactionStatus(String transactionStatus);
+
+	Transaction getByTransactionUTRId(String transactionUTR);
+
 }
