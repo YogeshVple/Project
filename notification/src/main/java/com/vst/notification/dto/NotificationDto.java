@@ -3,6 +3,7 @@ package com.vst.notification.dto;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,19 +23,19 @@ public class NotificationDto {
 	
 	@Id
 	private String notificationId;
-	@NotNull
+	@NotNull @NotBlank
 	private String notificationCode;
-	@NotNull
+	@NotNull @NotBlank
 	private String notificationType;
-	@NotNull
+	@NotNull @NotBlank
 	private String notificationData;
-	@NotNull
+	@NotNull @NotBlank
 	private String createdDate;
-	@NotNull
+	@NotNull @NotBlank
 	private String modifiedDate;
-	@NotNull
+	@NotNull @NotBlank
 	private String createdBy;
-	@NotNull
+	@NotNull @NotBlank
 	private String modifiedBy;
 	private boolean isActive;
 

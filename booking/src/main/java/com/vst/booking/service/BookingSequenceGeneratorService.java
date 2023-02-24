@@ -34,7 +34,7 @@ public class BookingSequenceGeneratorService {
 
 		String numberData = "";
 		Date dNow = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MMddyyHHmmss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyHHmmss");
 		int num = getSequenceNumber(BookingDto.SEQUENCE_NAME);
 		if (num >= 1 && num <= 9)
 			numberData = numberData + "000000" + num;

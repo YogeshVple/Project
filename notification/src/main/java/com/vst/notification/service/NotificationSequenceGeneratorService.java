@@ -34,7 +34,7 @@ public class NotificationSequenceGeneratorService {
 	public String idGen() {
 		String numberData = "";
 		Date dNow = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MMddyyyyHHmmss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyHHmmss");
 		int num = getSequenceNumber(NotificationDto.SEQUENCE_NAME);
 		if (num >= 1 && num <= 9)
 			numberData = numberData + "000000" + num;
@@ -44,11 +44,11 @@ public class NotificationSequenceGeneratorService {
 			numberData = numberData + "0000" + num;
 		else if (num >= 1000 && num <= 9999)
 			numberData = numberData + "000" + num;
-		else if (num >= 10000 && num <= 1000000)
+		else if (num >= 10000 && num <= 99999)
 			numberData = numberData + "00" + num;
-		else if (num >= 10000 && num <= 1000000)
+		else if (num >= 10000 && num <= 999999)
 			numberData = numberData + "0" + num;
-		else if (num >= 10000 && num <= 1000000)
+		else if (num >= 10000 && num <= 9999999)
 			numberData = numberData + "" + num;
 		return "NFT" + dateFormat.format(dNow) + numberData;
 	}

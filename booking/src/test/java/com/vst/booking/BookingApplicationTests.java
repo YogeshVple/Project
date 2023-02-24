@@ -55,6 +55,8 @@ class BookingApplicationTests {
 		when(bookingRepository.save(booking)).thenReturn(booking);
 		assertEquals("Data added", bookingServiceImpl.add(dto));
 	}
+	
+	
 
 	
 	

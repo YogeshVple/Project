@@ -46,32 +46,26 @@ public class NotificationServiceImpl implements NotificationServiceInterface {
 			Notification notification = notificationConverter.dtoToEntity(notificationDto);
 
 			if (obj != null) {
-				if (notification.getNotificationCode() != null)
-					if (!notification.getNotificationCode().isBlank())
+				
+				if (notification.getNotificationCode() != null && !notification.getNotificationCode().isBlank())
 						obj.setNotificationCode(notification.getNotificationCode());
 
-				if (notification.getNotificationType() != null)
-					if (!notification.getNotificationType().isBlank())
+				if (notification.getNotificationType()!= null && !notification.getNotificationType().isBlank())
 						obj.setNotificationType(notification.getNotificationType());
 
-				if (notification.getNotificationData() != null)
-					if (!notification.getNotificationData().isBlank())
+				if (notification.getNotificationData() != null && !notification.getNotificationData().isBlank())
 						obj.setNotificationData(notification.getNotificationData());
 
-				if (notification.getCreatedDate() != null)
-					if (!notification.getCreatedDate().isBlank())
+				if (notification.getCreatedDate() != null && !notification.getCreatedDate().isBlank())
 						obj.setCreatedDate(notification.getCreatedDate());
 
-				if (notification.getModifiedDate() != null)
-					if (!notification.getModifiedDate().isBlank())
+				if (notification.getModifiedDate() != null && !notification.getModifiedDate().isBlank())
 						obj.setModifiedDate(notification.getModifiedDate());
 
-				if (notification.getCreatedBy() != null)
-					if (!notification.getCreatedBy().isBlank())
+				if (notification.getCreatedBy() != null && !notification.getCreatedBy().isBlank())
 						obj.setCreatedBy(notification.getCreatedBy());
 
-				if (notification.getModifiedBy() != null)
-					if (!notification.getModifiedBy().isBlank())
+				if (notification.getModifiedBy() != null && !notification.getModifiedBy().isBlank())
 						obj.setModifiedBy(notification.getModifiedBy());
 
 				notificationRepository.save(obj);

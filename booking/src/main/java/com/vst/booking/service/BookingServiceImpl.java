@@ -1,5 +1,7 @@
 package com.vst.booking.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class BookingServiceImpl implements BookingServiceInterface {
 	@Autowired
 	BookingSequenceGeneratorService bookingSeqGenService;
 
+	Date dNow = new Date();
+	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy HH.mm.ss");
+
 	private String string = "Please Enter Vaild ID";
 
 	@Override
@@ -32,6 +37,8 @@ public class BookingServiceImpl implements BookingServiceInterface {
 
 		bookingDto.setBookingId(bookingSeqGenService.idGen());
 		bookingDto.setActive(true);
+		bookingDto.setCreatedDate(dateFormat.format(dNow));
+		bookingDto.setModifiedDate(dateFormat.format(dNow));
 		Booking booking = bookingConveter.dtoToEntity(bookingDto);
 		bookingRepository.save(booking);
 		return "Data added";
@@ -66,74 +73,55 @@ public class BookingServiceImpl implements BookingServiceInterface {
 	public void edit(String bookingId, BookingDto bookingDto) {
 
 		if (!bookingId.isBlank()) {
-			
+
 			Booking obj = bookingRepository.findByBookingIdAndIsActiveTrue(bookingId);
-			
+
 			Booking booking = bookingConveter.dtoToEntity(bookingDto);
 			if (obj != null) {
+				
+				if (booking.getBookingType() != null && !booking.getBookingType().isBlank())
+					obj.setBookingType(booking.getBookingType());
 
-				if (booking.getBookingType() != null)
-					if (!booking.getBookingType().isBlank())
-						obj.setBookingType(booking.getBookingType());
-
-				if (booking.getBookingHostId() != null)
-					if (!booking.getBookingHostId().isBlank())
+				if (booking.getBookingHostId() != null && !booking.getBookingHostId().isBlank())
 						obj.setBookingHostId(booking.getBookingHostId());
 
-				if (booking.getBookingCustomerId() != null)
-					if (!booking.getBookingCustomerId().isBlank())
+				if (booking.getBookingCustomerId() != null && !booking.getBookingCustomerId().isBlank())
 						obj.setBookingCustomerId(booking.getBookingCustomerId());
 
-				if (booking.getBookingCustomerId() != null)
-					if (!booking.getBookingVendorId().isBlank())
+				if (booking.getBookingCustomerId() != null && !booking.getBookingVendorId().isBlank())
 						obj.setBookingVendorId(booking.getBookingVendorId());
 
-				if (booking.getBookingStationId() != null)
-					if (!booking.getBookingStationId().isBlank())
+				if (booking.getBookingStationId() != null && !booking.getBookingStationId().isBlank())
 						obj.setBookingStationId(booking.getBookingStationId());
 
-				if (booking.getBookingDate() != null)
-					if (!booking.getBookingDate().isBlank())
+				if (booking.getBookingDate() != null && !booking.getBookingDate().isBlank())
 						obj.setBookingDate(booking.getBookingDate());
 
-				if (booking.getBookingTime() != null)
-					if (!booking.getBookingTime().isBlank())
+				if (booking.getBookingTime() != null && !booking.getBookingTime().isBlank())
 						obj.setBookingTime(booking.getBookingTime());
 
-				if (booking.getBookingCancellationReason() != null)
-					if (!bookingDto.getBookingCancellationReason().isBlank())
+				if (booking.getBookingCancellationReason() != null && !bookingDto.getBookingCancellationReason().isBlank())
 						obj.setBookingCancellationReason(booking.getBookingCancellationReason());
 
-				if (booking.getBookingStatus() != null)
-					if (!booking.getBookingStatus().isBlank())
+				if (booking.getBookingStatus() != null && !booking.getBookingStatus().isBlank())
 						obj.setBookingStatus(booking.getBookingStatus());
 
-				if (booking.getBookingReqDate() != null)
-					if (!booking.getBookingReqDate().isBlank())
+				if (booking.getBookingReqDate() != null && !booking.getBookingReqDate().isBlank())
 						obj.setBookingReqDate(booking.getBookingReqDate());
 
-				if (booking.getBookingCancellationReqDate() != null)
-					if (!booking.getBookingCancellationReqDate().isBlank())
+				if (booking.getBookingCancellationReqDate() != null && !booking.getBookingCancellationReqDate().isBlank())
 						obj.setBookingCancellationReqDate(booking.getBookingCancellationReqDate());
 
-				if (booking.getCreatedDate() != null)
-					if (!booking.getCreatedDate().isBlank())
+				if (booking.getCreatedDate() != null && !booking.getCreatedDate().isBlank())
 						obj.setCreatedDate(booking.getCreatedDate());
 
-				if (booking.getModifiedDate() != null)
-					if (!booking.getModifiedDate().isBlank())
-						obj.setModifiedDate(booking.getModifiedDate());
-
-				if (booking.getCreatedBy() != null)
-					if (!booking.getCreatedBy().isBlank())
+				if (booking.getCreatedBy() != null && !booking.getCreatedBy().isBlank())
 						obj.setCreatedBy(booking.getCreatedBy());
 
-				if (booking.getModifiedBy() != null)
-					if (!booking.getModifiedBy().isBlank())
-						obj.setModifiedBy(booking.getModifiedBy());
-
-				bookingRepository.save(obj);
+				obj.setModifiedDate(dateFormat.format(dNow));
 				
+				bookingRepository.save(obj);
+
 			} else {
 				throw new BookingNotFoundException("No Booking Details available");
 			}

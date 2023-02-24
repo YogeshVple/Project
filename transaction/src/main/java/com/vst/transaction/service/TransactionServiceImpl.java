@@ -23,6 +23,8 @@ public class TransactionServiceImpl implements TransactionServiceInterface {
 
 	@Autowired
 	TransactionConveter transactionConveter;
+	
+	String string = "No Data Found"; 
 
 	@Override
 	public String add(TransactionDto transactionDto) {
@@ -44,62 +46,58 @@ public class TransactionServiceImpl implements TransactionServiceInterface {
 			Transaction obj = transactionConveter.dtoToEntity(transactionDto);
 			if (transaction != null) {
 
-				if (transaction.getTransactionCustomerId() != null)
-					if (!transaction.getTransactionCustomerId().isBlank())
-						obj.setTransactionCustomerId(transaction.getTransactionCustomerId());
+				if (transaction.getTransactionCustomerId() != null && !transaction.getTransactionCustomerId().isBlank())
+					obj.setTransactionCustomerId(transaction.getTransactionCustomerId());
 
-				if (transaction.getTransactionHostId() != null)
-					if (!transaction.getTransactionHostId().isBlank())
-						obj.setTransactionHostId(transaction.getTransactionHostId());
+				if (transaction.getTransactionHostId() != null && !transaction.getTransactionHostId().isBlank())
+					obj.setTransactionHostId(transaction.getTransactionHostId());
 
-				if (transaction.getTransactionVendorId() != null)
-					if (!transaction.getTransactionVendorId().isBlank())
-						obj.setTransactionVendorId(transaction.getTransactionVendorId());
+				if (transaction.getTransactionVendorId() != null && !transaction.getTransactionVendorId().isBlank())
+					obj.setTransactionVendorId(transaction.getTransactionVendorId());
 
-				if (transaction.getTransactionStationId() != null)
-					if (!transaction.getTransactionStationId().isBlank())
-						obj.setTransactionStationId(transaction.getTransactionStationId());
+				if (transaction.getTransactionStationId() != null && !transaction.getTransactionStationId().isBlank())
 
-				if (transaction.getTransactionStatus() != null)
-					if (!transaction.getTransactionStationId().isBlank())
-						obj.setTransactionStatus(transaction.getTransactionStatus());
+					obj.setTransactionStationId(transaction.getTransactionStationId());
 
-				if (transaction.getTransactionUTR() != null)
-					if (!transaction.getTransactionUTR().isBlank())
-						obj.setTransactionUTR(transaction.getTransactionUTR());
+				if (transaction.getTransactionStatus() != null && !transaction.getTransactionStationId().isBlank())
 
-				if (transaction.getTransactionDate() != null)
-					if (!transaction.getTransactionDate().isBlank())
-						obj.setTransactionDate(transaction.getTransactionDate());
+					obj.setTransactionStatus(transaction.getTransactionStatus());
 
-				if (transaction.getTransactionTime() != null)
-					if (!transaction.getTransactionTime().isBlank())
-						obj.setTransactionTime(transaction.getTransactionTime());
+				if (transaction.getTransactionUTR() != null && !transaction.getTransactionUTR().isBlank())
 
-				if (transaction.getTransactionAmount() != null)
-					if (!transaction.getTransactionAmount().isBlank())
-						obj.setTransactionAmount(transaction.getTransactionAmount());
+					obj.setTransactionUTR(transaction.getTransactionUTR());
 
-				if (transaction.getCreatedDate() != null)
-					if (!transaction.getCreatedDate().isBlank())
-						obj.setCreatedDate(transaction.getCreatedDate());
+				if (transaction.getTransactionDate() != null && !transaction.getTransactionDate().isBlank())
 
-				if (transaction.getModifiedDate() != null)
-					if (!transaction.getModifiedDate().isBlank())
-						obj.setModifiedDate(transaction.getModifiedDate());
+					obj.setTransactionDate(transaction.getTransactionDate());
 
-				if (transaction.getCreatedBy() != null)
-					if (!transaction.getCreatedBy().isBlank())
-						obj.setCreatedBy(transaction.getCreatedBy());
+				if (transaction.getTransactionTime() != null && !transaction.getTransactionTime().isBlank())
 
-				if (transaction.getModifiedBy() != null)
-					if (!transaction.getModifiedBy().isBlank())
-						obj.setModifiedBy(transaction.getModifiedBy());
+					obj.setTransactionTime(transaction.getTransactionTime());
+
+				if (transaction.getTransactionAmount() != null && !transaction.getTransactionAmount().isBlank())
+
+					obj.setTransactionAmount(transaction.getTransactionAmount());
+
+				if (transaction.getCreatedDate() != null && !transaction.getCreatedDate().isBlank())
+
+					obj.setCreatedDate(transaction.getCreatedDate());
+
+				if (transaction.getModifiedDate() != null && !transaction.getModifiedDate().isBlank())
+					obj.setModifiedDate(transaction.getModifiedDate());
+
+				if (transaction.getCreatedBy() != null && !transaction.getCreatedBy().isBlank())
+
+					obj.setCreatedBy(transaction.getCreatedBy());
+
+				if (transaction.getModifiedBy() != null && !transaction.getModifiedBy().isBlank())
+
+					obj.setModifiedBy(transaction.getModifiedBy());
 
 				transactionRepository.save(obj);
 
 			} else {
-				throw new TransactionNotFoundException("Not Found");
+				throw new TransactionNotFoundException(string);
 			}
 		} else {
 			throw new TransactionIdNotAcceptableException("Invaild ID");
@@ -115,7 +113,7 @@ public class TransactionServiceImpl implements TransactionServiceInterface {
 				obj.setActive(false);
 				transactionRepository.save(obj);
 			} else {
-				throw new TransactionNotFoundException("Not Found");
+				throw new TransactionNotFoundException(string);
 			}
 		} else {
 			throw new TransactionIdNotAcceptableException("Invaild ID");
@@ -130,7 +128,7 @@ public class TransactionServiceImpl implements TransactionServiceInterface {
 		if (!list.isEmpty()) {
 			return list;
 		} else {
-			throw new TransactionNotFoundException("No Data");
+			throw new TransactionNotFoundException(string);
 		}
 	}
 
@@ -141,7 +139,7 @@ public class TransactionServiceImpl implements TransactionServiceInterface {
 			if (transaction != null) {
 				return transaction;
 			} else {
-				throw new TransactionNotFoundException("No Data Found");
+				throw new TransactionNotFoundException(string);
 			}
 		} else {
 			throw new TransactionIdNotAcceptableException("Not acceptable");
@@ -156,7 +154,7 @@ public class TransactionServiceImpl implements TransactionServiceInterface {
 			if (transaction != null) {
 				return transaction;
 			} else {
-				throw new TransactionNotFoundException("No Data Found");
+				throw new TransactionNotFoundException(string);
 			}
 		} else {
 			throw new TransactionIdNotAcceptableException("Not acceptable");
@@ -170,7 +168,7 @@ public class TransactionServiceImpl implements TransactionServiceInterface {
 			if (transaction != null) {
 				return transaction;
 			} else {
-				throw new TransactionNotFoundException("No Data Found");
+				throw new TransactionNotFoundException(string);
 			}
 		} else {
 			throw new TransactionIdNotAcceptableException("Not acceptable");
@@ -185,7 +183,7 @@ public class TransactionServiceImpl implements TransactionServiceInterface {
 			if (transaction != null) {
 				return transaction;
 			} else {
-				throw new TransactionNotFoundException("No Data Found");
+				throw new TransactionNotFoundException(string);
 			}
 		} else {
 			throw new TransactionIdNotAcceptableException("Not acceptable");
@@ -200,7 +198,7 @@ public class TransactionServiceImpl implements TransactionServiceInterface {
 			if (transaction != null) {
 				return transaction;
 			} else {
-				throw new TransactionNotFoundException("No Data Found");
+				throw new TransactionNotFoundException(string);
 			}
 		} else {
 			throw new TransactionIdNotAcceptableException("Not acceptable");
@@ -214,7 +212,7 @@ public class TransactionServiceImpl implements TransactionServiceInterface {
 			if (transaction != null) {
 				return transaction;
 			} else {
-				throw new TransactionNotFoundException("No Data Found");
+				throw new TransactionNotFoundException(string);
 			}
 		} else {
 			throw new TransactionIdNotAcceptableException("Not acceptable");
@@ -228,7 +226,7 @@ public class TransactionServiceImpl implements TransactionServiceInterface {
 			if (transaction != null) {
 				return transaction;
 			} else {
-				throw new TransactionNotFoundException("No Data Found");
+				throw new TransactionNotFoundException(string);
 			}
 		} else {
 			throw new TransactionIdNotAcceptableException("Not acceptable");
